@@ -1,0 +1,21 @@
+#!/bin/bash
+# install bc calculador
+
+monitor="eDP-1"
+
+if [ $# -eq 0 ]; then
+	exit 1
+fi
+
+current_brightness=$(xrandr --current --verbose | grep -m 1 -i brightness | cut -d ' ' -f2)
+
+
+if [ $1 == "+" ]; then
+	new_brightness=$(echo "$current_brightness + 0.1" | bc -l)
+	xrandr --output $monitor --brightness $new_brightness
+elif [ $1 == "-" ]; then
+	new_brightness=$(echo "$current_brightness - 0.1" | bc -l)
+	xrandr --output $monitor --brightness $new_brightness
+else
+	exit 1
+fi
