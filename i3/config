@@ -151,6 +151,12 @@ bindsym $mod+t exec --no-startup-id telegram
 bindcode 232 exec --no-startup-id brightness_control -
 bindcode 233 exec --no-startup-id brightness_control +
 
+# Move workspace
+bindsym $mod+m exec i3-msg "move workspace to output left"
+
+# Battery notification
+exec --no-startup-id i3-battery-popup
+
 # Set shut down, restart and locking features
 # (e)xit, (h)ibernate, (r)eboot, (Shift+s)hutdown missing
 bindsym $mod+0 mode "$mode_system"
@@ -159,7 +165,7 @@ mode "$mode_system" {
     bindsym l exec --no-startup-id lock, mode "default"
     bindsym u exec --no-startup-id dm-tool switch-to-greeter, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+    bindsym s exec --no-startup-id lock && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
     #bindsym e exec --no-startup-id i3exit logout, mode "default"
